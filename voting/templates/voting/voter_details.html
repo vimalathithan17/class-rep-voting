@@ -1,0 +1,46 @@
+{% extends 'homepage/base.html'%}
+{% load static %}
+
+        {% block content %}
+          
+        <img class="photo" src="{{voter.voter_image.url}}" style="position: absolute;
+        height: 40%;
+        top: 30%;
+        left: 27%;">
+        <form action="{% url 'voting' %}" method="get">
+
+            {%csrf_token%}
+            <img src="{% static 'img/Group 1.png' %}" >
+            
+            
+            <p class="name" style="position: absolute;
+            top: 30%;
+            left: 45%;
+            font-size: 150%;">Name: {{voter.name}}</p>
+            
+            <p class="rno" style="position: absolute;
+            top: 40%;
+            left: 45%;
+            font-size: 150%;" >Roll Number: {{voter.rno}}</p>
+            
+            <p class="dept" style="position: absolute;
+            top: 50%;
+            left: 45%;
+            font-size: 150%;" >Department: {{voter.dept}}</p>
+        
+            
+            
+            <input type="text" name="rollno" value="{{roll_no}}" style="display: none;">
+            <button type="submit" value="Vote" class="vote_button" style=" position: absolute;
+                left: 45%;
+                top: 71.8%;
+                height: 3%;
+                width: 4.5%;
+                text-align: center;
+                font-size: 100%;
+                font-weight: bold;
+                background-color: #FFEB3C;">
+                    Vote</button>
+            
+        </form>
+        {%endblock content%}
