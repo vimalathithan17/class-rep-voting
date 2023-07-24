@@ -1,0 +1,133 @@
+{% load static %}
+<!doctype html>
+
+<html>
+	<head> 
+		<title> Candidate Registration Form </title>
+		<style>
+			body{
+				position: static;
+			}
+			h1.relative{
+				position: fixed;
+				top: 5%;
+				left: 34%;
+				color: red;
+				text-align: centre;
+			}
+			form{
+				position: fixed;
+				box-shadow:  -10px 5px 60px 4px rgb(138, 138, 138);
+				left: 28.5%;
+				top: 24%;
+				height: 59%;
+				width: 36.8%;
+				
+				color: rgb(16, 3, 197);
+				text-align: center;
+				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				font-size: 16px;
+				/*border-style:outset;*/
+				border-width: 5px;
+				
+				border-color: rgb(228, 228, 228);
+			}
+			.fname
+			{
+				
+				position: relative;
+				text-align: centre;
+				top: 5%;
+				left: 5%;
+			}
+			.sname
+			{
+				position: relative;
+				text-align: center;
+				top: 5%;
+				left: 2.9%;
+			}
+
+			.dob
+			{
+				position: relative;
+				text-align: center;
+				top: 5%;
+				left: -2%;
+			}
+
+			.gendre
+			{
+				position: relative;
+				text-align: center;
+				top: 5%;
+				left: -3%;
+			}
+
+			.dept
+			{
+				position: relative;
+				text-align: center;
+				top: 5%;
+				left: 3%;	
+			}
+
+			.rno
+			{
+				position: relative;
+				text-align: center;
+				top: 5%;
+				left: 4.5%;
+			}
+
+			.button1{
+				position: fixed;
+				text-align: right;
+				height: 3%;
+				width: 4.5%;
+				color: rgb(255, 255, 255);
+				border-radius: 10px ;
+				font-weight: bold;
+				top: 75%;
+				background-color: rgba(36, 94, 255, 0.808);
+				left: 45%;
+			}
+
+			.email{
+				position: relative;
+				top: 5%;
+				left: 7%
+			}
+			.photo{
+				position: relative;
+				left: 9%;
+				top: 5%;
+			}
+		</style>
+	</head>
+	<body>
+		<!img class="swasthi" src="{% static 'candiatereg/Swasthi.jpg' %}" alt="img not found">
+		<h1 class="relative"> Candidate Registration Form </h1>
+		
+		<form method="POST" enctype="multipart/form-data" class="form">
+			{% csrf_token %}
+			
+
+			<p class="fname"> First Name: {{form.first_name}}</p>
+			<p class="sname">Second name: {{form.second_name}}</p>
+			<p class="dob">Date of Birth: {{form.dob}} </p>
+			<p class="gendre">Gender: {{form.gender}} </p>
+			<p class="dept">Department: {{form.department}}</p>
+			<p class="rno">Roll number: {{form.roll_no}}</p>
+			<p class="email">Email ID: {{form.email}}</p>
+			<p class="photo">Candidate Photo: {{form.photo}}</p>
+			
+			
+		</from>				
+
+		<br><button type="submit" class="button1" >
+			Submit 	
+		</button></br>
+		
+	</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+        
+        
+        {% block content %}
+        <h1>Welcome to Class Rep Election</h1>
+        <img class="homepage" src="{% static 'homepage/Homepage.jpg'%}" alt="image not found">
+
+        <form>
+            
+            <div class="candidate">
+                <button  type="submit" style="background-color: aqua; height: 71px; width: 400px; text-align: center;font-size: 20px;">
+                    <a href="{% url 'candidatereg:register' %}" style="text-decoration: none;">
+                        Candidate 
+                    </a>
+                </button>
+            </div>
+            
+            <div class="voter">
+                <button type="submit" style="background-color: rgb(208, 128, 255); height: 71px; width: 400px; text-align: center; font-size: 20px;">
+                    <a href="{% url 'voter_details' %}" style="text-decoration: none;">
+                        Voter
+                    </a></button>
+
+            </div>
+            <div class="result">
+                <button type="submit" style="background-color: rgb(68, 255, 68); height: 71px; width: 400px; text-align: center; font-size: 20px;" >
+                    <a href="{%url 'election_result:result' %}" style="text-decoration: none;">
+                        Result
+                    </a>
+                </button>
+            </div>
+        </form>
+        {% endblock %}
+   
