@@ -8,6 +8,10 @@ django = "*"
 pillow = "*"
 pyzbar = "*"
 opencv-python = "*"
+pyodbc = "*"
+mssql-django = "*"
+django-storages = {extras = ["azure"], version = "*"}
+django-environ = "*"
 
 [dev-packages]
 

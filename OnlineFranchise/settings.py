@@ -1,4 +1,4 @@
-
+import environ
 from pathlib import Path
 import os
 import mimetypes
@@ -6,6 +6,14 @@ import mimetypes
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+
+
+# Take environment variables from .env file
+environ.Env.read_env(BASE_DIR / '.env')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -16,7 +24,7 @@ SECRET_KEY = 'django-insecure-1j0r&p$5a+p*dk*q7c)4pf*70+y)5+7%a+=-bcsn+cjufe*^p(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.8.152','127.0.0.1']
 
 
 # Application definition
@@ -72,12 +80,30 @@ WSGI_APPLICATION = 'OnlineFranchise.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+        'default': {
+            'ENGINE': 'mssql',
+            'NAME': 'vdb',
+            'USER': 'vimal@voting-system-server',
+            'PASSWORD': 'V@psgtechIT22',
+            'HOST': 'voting-system-server.database.windows.net',
 
+            'OPTIONS': {
+                'driver': 'ODBC Driver 17 for SQL Server',
+            },
+        },
+}
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.azure_storage.AzureStorage",
+        "OPTIONS": {
+          'timeout':20,
+          'expiration_secs':500
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -121,8 +147,11 @@ STATICFILES_DIRS = [
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
-MEDIA_URL='/media/'
+#MEDIA_URL='https://votingsystemblob.blob.core.windows.net/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 mimetypes.add_type("text/css", ".css", True)
+AZURE_CONTAINER=env('AZURE_CONTAINER')
+AZURE_ACCOUNT_NAME=env('AZURE_ACCOUNT_NAME')
+AZURE_ACCOUNT_KEY=env('AZURE_ACCOUNT_KEY')

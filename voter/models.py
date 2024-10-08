@@ -13,13 +13,13 @@ class VoterList(models.Model):
     def __str__(self):
         return f'voter {self.rno}'
         
-    def save(self,*args,**kwargs):
-        super(). save(*args,**kwargs)
-        img= Image.open(self.voter_image.path)
-        if img.height>150 or img.width>150:
-            output_size=(150,150)
-            img.thumbnail(output_size)
-            img.save(self.voter_image.path)
+    # def save(self,*args,**kwargs):
+    #     super(). save(*args,**kwargs)
+    #     img= Image.open(self.voter_image.path)
+    #     if img.height>150 or img.width>150:
+    #         output_size=(150,150)
+    #         img.thumbnail(output_size)
+    #         img.save(self.voter_image.path)
             
 
 

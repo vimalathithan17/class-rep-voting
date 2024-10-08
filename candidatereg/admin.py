@@ -5,5 +5,5 @@ from .models import Candidates
 
 class AdminCandidates(admin.ModelAdmin):
     model=Candidates
-    list_display=('first_name','second_name','dob','gender','department','roll_no','email','photo','votes')
+    list_display=('first_name','second_name','dob','gender','department','rno','email','photo','votes')
 admin.site.register(Candidates,AdminCandidates)

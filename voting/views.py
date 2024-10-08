@@ -37,7 +37,7 @@ def decode_barcode(frame):
 def main():
     # Initialize the video stream
     video_capture = cv2.VideoCapture(0)
-
+    
     barcode_detected = False  # Flag to track if barcode is detected
 
     while True:
@@ -87,7 +87,7 @@ def voting(request):
         voter=VoterList.objects.get(rno=rno)
         print(request.POST)
         voted_roll_no=request.POST['choice']
-        voted_candidate=Candidates.objects.get(roll_no=voted_roll_no)
+        voted_candidate=Candidates.objects.get(rno=voted_roll_no)
         voted_candidate.votes+=1
         voted_candidate.save()
         voter.voted=True
