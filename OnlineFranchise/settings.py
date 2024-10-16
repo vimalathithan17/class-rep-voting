@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'candidatereg.apps.CandidateregConfig',
     'voter.apps.VoterConfig',
     'voting.apps.VotingConfig',
-    'results.apps.ResultsConfig'
+    'results.apps.ResultsConfig',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_hotp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_email',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -109,18 +115,18 @@ STORAGES = {
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    # },
+    # {
+    #     'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    # },
 ]
 
 
@@ -155,3 +161,11 @@ mimetypes.add_type("text/css", ".css", True)
 AZURE_CONTAINER=env('AZURE_CONTAINER')
 AZURE_ACCOUNT_NAME=env('AZURE_ACCOUNT_NAME')
 AZURE_ACCOUNT_KEY=env('AZURE_ACCOUNT_KEY')
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_HOST_USER='kakashi3717@gmail.com'
+EMAIL_HOST_PASSWORD='ymwkrdmqbuppiutz'
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL='22i272@psgtech.ac.in'
+LOGIN_URL='/login/'

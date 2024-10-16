@@ -7,9 +7,8 @@ from django.contrib.auth.decorators import user_passes_test
 import cv2
 from pyzbar import pyzbar
 from django.contrib import messages
-
-
-
+from django.contrib.auth import authenticate,login,logout
+from django_otp.decorators import otp_required
 
 def decode_barcode(frame):
     # Find and decode barcodes
@@ -93,6 +92,7 @@ def voting(request):
         voter.voted=True
         voter.save()
         messages.success(request,"Your Vote Has Been Successfully Casted")
+        logout(request)
         return redirect("homepage:home")
 def voter_check(request):
         
@@ -101,11 +101,18 @@ def voter_check(request):
             voter=VoterList.objects.get(rno=voter_roll_no)
             
             if voter.voted:
-                 messages.success(request,"You have already casted your vote")
-                 return redirect('homepage:home')
+                messages.success(request,"You have already casted your vote")
+                return redirect('homepage:home')
+                
             else:
-
-                template='voting/voter_details.html'
-                data={'voter':voter,'roll_no':voter_roll_no}
-                return  render( request,template,data)
-        
+                user = authenticate(request, username=voter_roll_no.lower(), password=voter_roll_no.lower())
+                print(voter_roll_no,str(user))
+                login(request, user)
+                return redirect('voter_details2')
+                
+@otp_required
+def voter_check2(request):
+    voter=voter=VoterList.objects.get(rno=str(request.user).upper())
+    template='voting/voter_details.html'
+    data={'voter':voter,'roll_no':str(request.user).upper()}
+    return  render( request,template,data)

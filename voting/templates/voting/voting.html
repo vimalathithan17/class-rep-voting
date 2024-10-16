@@ -1,35 +1,162 @@
-
-{% extends 'homepage/base.html'%}
-
-
+{% extends 'homepage/base.html' %}
 {% load static %}
 
-  
-    {% block content %}
-    <img src="{% static 'img/Group 3.png' %}"  class="header" >      
-    <form action="" method="post">
-        {%csrf_token%}
+{% block content %}
+    <div class="voting-container">
+        <img src="{% static 'img/Group 3.png' %}" class="header" alt="Header Image">
 
-         {% for candidate in candidates %}
-         <div class="parent">
-           
-            <div class="child2"><img src="{{candidate.photo.url}}" class="img">
-            </div>
-            <div class="child3"><p class="name" >Name:{{ candidate.first_name }} {{candidate.second_name}} </p>
-                <p class="rno" >Roll no: {{candidate.rno}}</p>
-                <p class="dept" >Department: {{candidate.department}} </p>
+        <form action="" method="post">
+            {% csrf_token %}
+
+            {% for candidate in candidates %}
+            <div class="candidate-card">
+                <div class="candidate-image">
+                    <img src="{{candidate.photo.url}}" class="img" alt="Candidate Photo">
                 </div>
-            <div class="child4">
-                <input type="radio" name="choice" class="choice" id="choice{{ forloop.counter }}" value="{{candidate.rno}}" >
-            </div>
-         </div>
-     {% endfor %}
-    <input type="text" name="rollno" value="{{roll_no}}" style="display: none;">
-    
-    <button type="submit" class="vote_button" value="vote"> VOTE! </button>
-    
-    
-    </form>
-    
-    {%endblock content%}
 
+                <div class="candidate-info">
+                    <p class="name">Name: {{ candidate.first_name }} {{ candidate.second_name }}</p>
+                    <p class="rno">Roll No: {{ candidate.rno }}</p>
+                    <p class="dept">Department: {{ candidate.department }}</p>
+                </div>
+
+                <div class="candidate-choice">
+                    <input type="radio" name="choice" class="choice" id="choice{{ forloop.counter }}" value="{{ candidate.rno }}">
+                </div>
+            </div>
+            {% endfor %}
+
+            <input type="text" name="rollno" value="{{ roll_no }}" style="display: none;">
+
+            <button type="submit" class="vote-button">VOTE!</button>
+        </form>
+    </div>
+
+    <style>
+        /* Body background */
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the voting section */
+        .voting-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Header image styling */
+        .header {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        /* Candidate card layout */
+        .candidate-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for the candidate card */
+        .candidate-card:hover {
+            background-color: #e7f1ff;
+        }
+
+        /* Candidate photo */
+        .candidate-image img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+        }
+
+        /* Candidate information */
+        .candidate-info {
+            flex-grow: 1;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .candidate-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .name {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* Candidate selection (radio button) */
+        .candidate-choice {
+            padding-left: 20px;
+        }
+
+        .choice {
+            transform: scale(1.5);
+            cursor: pointer;
+        }
+
+        /* Vote button styling */
+        .vote-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hover effect for the vote button */
+        .vote-button:hover {
+            background-color: #218838;
+        }
+
+        /* Responsive layout */
+        @media (max-width: 768px) {
+            .candidate-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .candidate-info {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+
+            .candidate-choice {
+                padding-left: 0;
+                margin-top: 10px;
+            }
+        }
+    </style>
+{% endblock content %}

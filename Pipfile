@@ -12,7 +12,7 @@ pyodbc = "*"
 mssql-django = "*"
 django-storages = {extras = ["azure"], version = "*"}
 django-environ = "*"
-
+django-otp = "*"
 [dev-packages]
 
 [requires]

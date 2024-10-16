@@ -10,6 +10,7 @@ urlpatterns = [
     path('register/', include('candidatereg.urls')),
     path('vote/',voting_views.voting,name='voting'),
     path('voter_details/',voting_views.voter_check,name='voter_details'),
+    path('voter_details2/',voting_views.voter_check2,name='voter_details2'),
     path('result/', include('results.urls'))
 ]
 
